@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
 using UIKit;
 
 namespace DevSandbox
@@ -62,14 +63,14 @@ namespace DevSandbox
                 }
             );
 
-            ScrollContainer.AddSubviews(views.ToArray());
+            View.AddSubviews(views.ToArray());
 
             var node = views.First;
             while (node.Next != null)
             {
-                var refView = (node.Previous?.Value ?? ScrollContainer);
+                NSObject refItem = node.Previous?.Value ?? new NSObject(TopLayoutGuide.Handle);
+                var refAttribute = node.Previous == null ? NSLayoutAttribute.Top : NSLayoutAttribute.Bottom;
                 UIView subview = node.Value;
-
                 subview.TranslatesAutoresizingMaskIntoConstraints = false;
 
                 //subview.TopAnchor.ConstraintEqualTo(refView.TopAnchor, 5).Active = true;
@@ -77,23 +78,23 @@ namespace DevSandbox
                 //subview.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, 5).Active = true;
                 //subview.HeightAnchor.ConstraintEqualTo(80);
 
-                ScrollContainer.AddConstraints(new NSLayoutConstraint[] {
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Top,NSLayoutRelation.Equal, refView,  NSLayoutAttribute.Top,1,100),
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.LeadingMargin,NSLayoutRelation.Equal, ScrollContainer, NSLayoutAttribute.Leading,1,5),
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.TrailingMargin,NSLayoutRelation.Equal, ScrollContainer ,NSLayoutAttribute.Trailing,1,5),
+                View.AddConstraints(new NSLayoutConstraint[] {
+                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Top,NSLayoutRelation.Equal,  refItem, refAttribute,1,20),
+                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Leading,NSLayoutRelation.Equal, View, NSLayoutAttribute.Leading,1,10),
+                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Trailing,NSLayoutRelation.Equal, View ,NSLayoutAttribute.Trailing,1,-10),
                     NSLayoutConstraint.Create(subview,NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 80),
                 });
 
                 node = node.Next;
             }
 
-            View.Add(ScrollContainer);
-            View.AddConstraints(new NSLayoutConstraint[] {
-                NSLayoutConstraint.Create(ScrollContainer, NSLayoutAttribute.TopMargin, NSLayoutRelation.Equal, View, NSLayoutAttribute.Top,0,0),
-                NSLayoutConstraint.Create(ScrollContainer, NSLayoutAttribute.BottomMargin, NSLayoutRelation.Equal, View, NSLayoutAttribute.BottomMargin,0,0),
-                NSLayoutConstraint.Create(ScrollContainer, NSLayoutAttribute.LeadingMargin, NSLayoutRelation.Equal, View, NSLayoutAttribute.Leading,0,0),
-                NSLayoutConstraint.Create(ScrollContainer, NSLayoutAttribute.TrailingMargin, NSLayoutRelation.Equal, View, NSLayoutAttribute.Trailing,0,0),
-            });
+            //View.Add(ScrollContainer);
+            //View.AddConstraints(new NSLayoutConstraint[] {
+            //    NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Top,NSLayoutRelation.Equal, View, NSLayoutAttribute.Top,1,0),
+            //    NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Bottom,NSLayoutRelation.Equal, View ,NSLayoutAttribute.Bottom,1,0),
+            //    NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Leading,NSLayoutRelation.Equal, View, NSLayoutAttribute.Leading,1,0),
+            //    NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Trailing,NSLayoutRelation.Equal, View ,NSLayoutAttribute.Trailing,1,0),
+            //});
 
             //ScrollContainer.BackgroundColor = UIColor.White;
             //View.Add(ScrollContainer);
