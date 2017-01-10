@@ -9,7 +9,7 @@ namespace DevSandbox
     public class PlaygroundViewController : UIViewController
     {
         public UIScrollView ScrollContainer { get; set; }
-        public UIView ContentView { get; set; } 
+        public UIStackView ContentView { get; set; }
         public LinkedList<UIView> RowViews { get; set; } = new LinkedList<UIView>(
                 new List<UIView>{
                     new UITextView
@@ -23,7 +23,44 @@ namespace DevSandbox
                         Text = "Subheadline",
                         BackgroundColor = UIColor.DarkGray,
                         Font = UIFont.PreferredSubheadline
-},
+                    },
+                    new UITextView
+                    {
+                        Text = "Title 1",
+                        Font = UIFont.PreferredTitle1,
+                    },
+                    new UITextView
+                    {
+                        Text = "Title 2",
+                        Font = UIFont.PreferredTitle2,
+                    },
+                    new UITextView
+                    {
+                        Text = "Title 3",
+                        Font = UIFont.PreferredTitle3,
+                    },
+                    new UITextView
+                    {
+                        Text = "Caption 1",
+                        Font = UIFont.PreferredCaption1,
+                    },
+                    new UITextView
+                    {
+                        Text = "Caption 2",
+                        Font = UIFont.PreferredCaption2,
+                    },
+                    new UITextView
+                    {
+                        Text = "Text Views (This is a Headline)",
+                        BackgroundColor = UIColor.DarkGray,
+                        Font = UIFont.PreferredHeadline,
+                    },
+                    new UITextView
+                    {
+                        Text = "Subheadline",
+                        BackgroundColor = UIColor.DarkGray,
+                        Font = UIFont.PreferredSubheadline
+                    },
                     new UITextView
                     {
                         Text = "Title 1",
@@ -54,9 +91,13 @@ namespace DevSandbox
 
         public PlaygroundViewController()
         {
-            ContentView = new UIView();
+            ContentView = new UIStackView();
             ContentView.BackgroundColor = UIColor.FromRGB(60, 0, 0);
             ContentView.TranslatesAutoresizingMaskIntoConstraints = false;
+            ContentView.Axis = UILayoutConstraintAxis.Vertical;
+            ContentView.Distribution = UIStackViewDistribution.EqualSpacing;
+            ContentView.Alignment = UIStackViewAlignment.Center;
+            ContentView.Spacing = 8;
 
             ScrollContainer = new UIScrollView();
             ScrollContainer.BackgroundColor = UIColor.FromRGB(0, 60, 0);
@@ -79,8 +120,7 @@ namespace DevSandbox
             var node = RowViews.First;
             while (node.Next != null)
             {
-                NSObject refItem = node.Previous?.Value ?? ContentView;
-                var refAttribute = node.Previous == null ? NSLayoutAttribute.Top : NSLayoutAttribute.Bottom;
+
                 UIView subview = node.Value;
                 subview.TranslatesAutoresizingMaskIntoConstraints = false;
 
@@ -89,12 +129,14 @@ namespace DevSandbox
                 //subview.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, 5).Active = true;
                 //subview.HeightAnchor.ConstraintEqualTo(80);
 
-                ContentView.AddConstraints(new NSLayoutConstraint[] {
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Top,NSLayoutRelation.Equal,  refItem, refAttribute,1,20),
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Leading,NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Leading,1,10),
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Trailing,NSLayoutRelation.Equal, ContentView ,NSLayoutAttribute.Trailing,1,-10),
-                    NSLayoutConstraint.Create(subview,NSLayoutAttribute.Height, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, 1, 80),
-                });
+                subview.HeightAnchor.ConstraintEqualTo(80).Active = true;
+                subview.WidthAnchor.ConstraintEqualTo(200).Active = true;
+
+
+
+                ContentView.AddArrangedSubview(subview);
+                //subview.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor, 0);
+                //subview.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, 0);
 
                 node = node.Next;
             }
@@ -112,7 +154,6 @@ namespace DevSandbox
                 NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Leading,NSLayoutRelation.Equal, View, NSLayoutAttribute.Leading,1,0),
                 NSLayoutConstraint.Create(ScrollContainer,NSLayoutAttribute.Trailing,NSLayoutRelation.Equal, View ,NSLayoutAttribute.Trailing,1,0),
                 NSLayoutConstraint.Create(ContentView,NSLayoutAttribute.Width,NSLayoutRelation.Equal, View, NSLayoutAttribute.Width,1,0),
-                NSLayoutConstraint.Create(ContentView,NSLayoutAttribute.Height,NSLayoutRelation.Equal, View, NSLayoutAttribute.Height,1,0),
             });
         }
     }
