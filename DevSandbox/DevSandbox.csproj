@@ -109,7 +109,8 @@
     <Compile Include="ListViewController.cs" />
     <Compile Include="ListSource.cs" />
     <Compile Include="ListEntry.cs" />
-    <Compile Include="PlaygroundViewController.cs" />
+    <Compile Include="ListOfViewsController.cs" />
+    <Compile Include="TextViewsController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

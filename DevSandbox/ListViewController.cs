@@ -22,7 +22,7 @@ namespace DevSandbox
             ListView.Source = new ListSource
             {
                 Entries = {
-                    new ListEntry<PlaygroundViewController> { DisplayText = "Playground", SubText = "Standard Controls" },
+                    new ListEntry<TextViewsController> { DisplayText = "Playground", SubText = "Standard Controls" },
                     new ListEntry<UIViewController> { DisplayText = "Collection View", SubText = "More flexible than the table views" },
                     new ListEntry<UIViewController> { DisplayText = "Pull To Refresh", SubText = "UI pattern for updating"  },
                 }
