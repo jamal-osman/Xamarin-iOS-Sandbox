@@ -22,9 +22,8 @@ namespace DevSandbox
             ListView.Source = new ListSource
             {
                 Entries = {
-                    new ListEntry<TextViewsController> { DisplayText = "Playground", SubText = "Standard Controls" },
-                    new ListEntry<UIViewController> { DisplayText = "Collection View", SubText = "More flexible than the table views" },
-                    new ListEntry<UIViewController> { DisplayText = "Pull To Refresh", SubText = "UI pattern for updating"  },
+                    new ListEntry<TextViewsController> { DisplayText = "Text views", SubText = "See some of the default fonts" },
+                    new ListEntry<AutoLayoutController> { DisplayText = "Auto Layout", SubText = "Positioning examples" },
                 }
             };
 

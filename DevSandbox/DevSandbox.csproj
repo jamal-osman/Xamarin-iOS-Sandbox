@@ -111,6 +111,7 @@
     <Compile Include="ListEntry.cs" />
     <Compile Include="ListOfViewsController.cs" />
     <Compile Include="TextViewsController.cs" />
+    <Compile Include="AutoLayoutController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

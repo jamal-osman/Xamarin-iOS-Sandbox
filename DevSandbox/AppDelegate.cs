@@ -11,7 +11,8 @@ namespace DevSandbox
     {
         // class-level declarations
 
-        public static UINavigationController NavigationController;
+        public static AppDelegate Current { get { return (AppDelegate)UIApplication.SharedApplication.Delegate; } }
+        public UINavigationController NavigationController { get { return (UINavigationController)Window.RootViewController; } }
 
         public override UIWindow Window
         {
@@ -21,9 +22,8 @@ namespace DevSandbox
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            NavigationController = new UINavigationController(new ListViewController());
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Window.RootViewController = NavigationController;
+            Window.RootViewController = new UINavigationController(new ListViewController());;
             Window.MakeKeyAndVisible();
 
             return true;
