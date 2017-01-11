@@ -24,6 +24,7 @@ namespace DevSandbox
                 Entries = {
                     new ListEntry<TextViewsController> { DisplayText = "Text views", SubText = "See some of the default fonts" },
                     new ListEntry<AutoLayoutController> { DisplayText = "Auto Layout", SubText = "Positioning examples" },
+                    new ListEntry<GesturesController> { DisplayText = "Gestures", SubText = "Examples of gestures for user interaction" },
                 }
             };
 

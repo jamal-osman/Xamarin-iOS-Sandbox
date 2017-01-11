@@ -112,6 +112,7 @@
     <Compile Include="ListOfViewsController.cs" />
     <Compile Include="TextViewsController.cs" />
     <Compile Include="AutoLayoutController.cs" />
+    <Compile Include="GesturesController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
