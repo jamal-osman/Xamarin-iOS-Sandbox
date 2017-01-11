@@ -23,7 +23,7 @@ namespace DevSandbox
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             var entry = Entries[indexPath.Row];
-            AppDelegate.NavigationController.PushViewController(entry.ViewController, true);
+            AppDelegate.Current.NavigationController.PushViewController(entry.ViewController, true);
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
