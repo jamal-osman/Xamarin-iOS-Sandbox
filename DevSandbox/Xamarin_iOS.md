@@ -94,7 +94,9 @@ etc...
 
 The formula can be expressed more generically as:
 
+```csharp
 item1.attribute1 = (multiplier) * item2.attribute2 + (constant)
+```
 
 sometimes there is no item2 / attribute2 or constant, but this is generally the case.
 
